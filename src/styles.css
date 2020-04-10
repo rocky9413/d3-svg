@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.lines {
+  stroke: red;
+  stroke-width: 10;
+}
+
+.lines path {
+  stroke: cyan;
+  stroke-linejoin: round;
+}
+
+p {
+  color: blue;
+  font-size: 24px;
+}
