@@ -1,12 +1,12 @@
 import React from "react";
-import SVG from "./components/SVG";
+import BarChart from "./components/BarChart";
 import Face from "./components/Face";
 
 const App = () => {
   return (
     <div>
       {/* <Face /> */}
-      <SVG />
+      <BarChart />
     </div>
   );
 };

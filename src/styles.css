@@ -17,3 +17,11 @@ p {
   color: blue;
   font-size: 24px;
 }
+
+rect {
+  fill: steelblue;
+}
+
+text {
+  font-size: 1.4em;
+}
