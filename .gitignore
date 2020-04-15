@@ -11,6 +11,7 @@ yarn-error.log*
 
 # output from webpack parcel
 dist/
+build/
 
 # zip file for initial aws deployment
 *.zip
