@@ -11,6 +11,9 @@ const Home = () => {
         <li>
           <Link to="/barchart">Bar Chart</Link>
         </li>
+        <li>
+          <Link to="/linktest">Link Testing</Link>
+        </li>
       </ul>
     </div>
   );

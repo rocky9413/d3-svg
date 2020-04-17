@@ -1,5 +1,13 @@
 import React, { useRef, useEffect } from 'react';
-import { select, scaleLinear, max, scaleBand, axisLeft, axisBottom } from 'd3';
+import {
+  select,
+  scaleLinear,
+  max,
+  scaleBand,
+  axisLeft,
+  axisBottom,
+  format
+} from 'd3';
 
 const BarChart = () => {
   const width = 960;
@@ -23,8 +31,8 @@ const BarChart = () => {
   const margin = {
     top: 20,
     right: 50,
-    bottom: 20,
-    left: 100
+    bottom: 30,
+    left: 150
   };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -50,9 +58,12 @@ const BarChart = () => {
     const g = select('svg').append('g');
     g.attr('transform', `translate(${margin.left}, ${margin.top})`);
 
+    const xAxisTickFormat = number => format('.3s')(number).replace('G', 'B');
+    const xAxis = axisBottom(xScale).tickFormat(xAxisTickFormat);
+
     g.append('g').call(axisLeft(yScale));
     g.append('g')
-      .call(axisBottom(xScale))
+      .call(xAxis)
       .attr('transform', `translate(0, ${innerHeight})`);
 
     g.selectAll('rect')
@@ -73,6 +84,8 @@ const BarChart = () => {
   //     <svg width={width} height={height}></svg>
   //   </div>
   // );
+
+  // 3:51:40
 
   return isCurrent.current ? (
     <div>

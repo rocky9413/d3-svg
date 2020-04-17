@@ -2,10 +2,12 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackMerge = require('webpack-merge');
+
 const modeConfig = env => require(`./webpack-utils/${env}`)(env);
+const addPresets = require('./webpack-utils/addPresets');
 
 module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
-  console.log('WP MODE ===> ', mode);
+  // console.log('WP MODE ===> ', mode, ' --- Presets ===>', presets);
   return webpackMerge(
     {
       mode,
@@ -14,6 +16,9 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
         filename: 'bundle.js'
+      },
+      resolve: {
+        extensions: ['.js', '.jsx']
       },
       module: {
         rules: [
@@ -42,6 +47,7 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
         new webpack.ProgressPlugin()
       ]
     },
-    modeConfig(mode)
+    modeConfig(mode),
+    addPresets({ mode, presets })
   );
 };
