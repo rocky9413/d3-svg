@@ -11,11 +11,14 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
   return webpackMerge(
     {
       mode,
-      entry: './src/index.js',
+      // entry: './src/mainComponent/main.js',
+      entry: {
+        main: path.resolve(__dirname, './src/mainComponent/main.js'),
+        svg: path.resolve(__dirname, './src/svg/svgSection.js')
+      },
       output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
-        filename: 'bundle.js'
+        filename: '[name].js'
       },
       resolve: {
         extensions: ['.js', '.jsx']
@@ -39,11 +42,17 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
           }
         ]
       },
+      optimization: {
+        splitChunks: {
+          chunks: 'all'
+        }
+      },
       plugins: [
-        new HtmlWebpackPlugin({
-          template: path.resolve(__dirname, './src/index.html'),
-          filename: 'index.html'
-        }),
+        // new HtmlWebpackPlugin(),
+        // new HtmlWebpackPlugin({
+        //   template: path.resolve(__dirname, './src/index.html'),
+        //   filename: 'index.html'
+        // }),
         new webpack.ProgressPlugin()
       ]
     },

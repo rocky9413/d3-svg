@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Topics = () => {
   return (
-    <div className="div-home">
+    <div>
       <ul>
         <li>
-          <Link to="/face">Smile Face</Link>
+          <Link to="/svgs/face">Smile Face</Link>
         </li>
         <li>
-          <Link to="/barchart">Bar Chart</Link>
+          <Link to="/svgs/barchart">Bar Chart</Link>
         </li>
         <li>
           <Link to="/linktest">Link Testing</Link>
@@ -19,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Topics;

@@ -7,6 +7,8 @@ const template = (title, initialState = {}, content = '') => {
                   </script>
                   <script src="dist/client.js"></script>
                   `;
+    // import serialize from 'serialize-javascript';
+    // window.__INITIAL_STATE__ = ${serialize(initialData)};
   } else {
     scripts = ` <script src="dist/bundle.js"> </script> `;
   }
@@ -15,7 +17,7 @@ const template = (title, initialState = {}, content = '') => {
                 <head>
                   <meta charset="utf-8">
                   <title> ${title} </title>
-                  <link href="assets/style.css" rel="stylesheet">
+                  <link href="./styles.css" rel="stylesheet">
                 </head>
                 <body>
                   <div class="content">

@@ -91,7 +91,11 @@ const BarChart = () => {
     <div>
       <svg width={width} height={height}></svg>
     </div>
-  ) : null;
+  ) : (
+    <div>
+      <h2>{'bar chart'}</h2>
+    </div>
+  );
 };
 
 export default BarChart;
