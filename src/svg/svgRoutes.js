@@ -1,13 +1,13 @@
-import svgLists from './svgLists';
+import SvgLists from './SvgLists';
 import Face from './Face';
 import BarChart from './BarChart';
 
-const svgRoutes = [
+const SvgRoutes = [
   {
     path: '/svg',
     exact: true,
     name: 'd3-svg-lists',
-    component: svgLists
+    component: SvgLists
   },
   {
     path: '/svg/face',
@@ -21,4 +21,4 @@ const svgRoutes = [
   }
 ];
 
-export default svgRoutes;
+export default SvgRoutes;

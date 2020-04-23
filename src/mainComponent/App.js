@@ -6,10 +6,18 @@ import Header from './Header';
 const App = () => {
   return (
     <div>
-      <Header />
-      <hr />
-      <h3>Sections</h3>
-      {/* <Switch>
+      <h1>Pick a Section from below:</h1>
+      <a href="/svg">d3-SVG-Lists</a>
+    </div>
+  );
+};
+
+export default App;
+
+{
+  /* <Header /> */
+  /* <hr /> */
+  /* <Switch>
         {routes.map(({ path, exact, component: Component, ...rest }) => (
           <Route
             key={path}
@@ -18,10 +26,5 @@ const App = () => {
             render={props => <Component {...props} {...rest} />}
           />
         ))}
-      </Switch> */}
-      <a href="/svg">d3-SVG-Lists</a>
-    </div>
-  );
-};
-
-export default App;
+      </Switch> */
+}

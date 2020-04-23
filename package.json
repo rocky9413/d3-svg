@@ -4,13 +4,14 @@
   "description": "d3-svg-ssr",
   "main": "dist/main.js",
   "scripts": {
-    "start": "node --exec babel-node server/server.js",
-    "prod": "webpack --env.mode production",
+    "clean": "rimraf dist",
+    "start": "node dist/server.js",
+    "prod": "npm run clean && webpack --env.mode production --config webpack.front.js && webpack --env.mode production --config webpack.back.js",
     "prod:analyze": "npm run prod -- --env.presets analyze",
     "prod:compress": "npm run prod -- --env.presets compress",
     "prod:custom": "npm run prod -- --env.presets custom",
-    "dev-server": "nodemon --exec babel-node server/server.js",
-    "dev-client": "webpack-dev-server --env.mode development --open",
+    "dev-all": "webpack-dev-server --env.mode development --config webpack.front.js && webpack-dev-server --env.mode development --config webpack.back.js",
+    "dev-start": "nodemon --exec babel-node server/server.js",
     "format": "prettier --write \"src/**/*.{js,jsx,html}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "debug": "node --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js --env.mode production",
@@ -55,7 +56,8 @@
     "webpack-bundle-analyzer": "^3.7.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "d3": "^5.15.1",

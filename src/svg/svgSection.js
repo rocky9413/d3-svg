@@ -1,11 +1,12 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import svgLists from './svgLists';
+import SvgLists from './SvgLists';
 
-hydrate(
+const Svg = () => (
   <BrowserRouter>
-    <svgLists />
-  </BrowserRouter>,
-  document.getElementById('app')
+    <SvgLists />
+  </BrowserRouter>
 );
+
+hydrate(<Svg />, document.getElementById('app'));

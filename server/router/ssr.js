@@ -1,68 +1,65 @@
 import express from 'express';
 import React from 'react';
 import { renderToString, renderToNodeStream } from 'react-dom/server';
-import { StaticRouter, matchPath } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 import App from '../../src/mainComponent/App';
-import svgLists from '../../src/svg/svgLists';
+import SvgLists from '../../src/svg/SvgLists';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  const componentStream = renderToNodeStream(<App />);
-  const htmlStart = ` <!DOCTYPE html>
-    <html>
+const htmlStart = `<!DOCTYPE html>
+  <html>
     <head>
-      <link rel='shortcut icon' type='image/x-icon' href='/static/favicon.ico' />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <style>
-        body { font-family: Arial, sans-serif; font-size: 15px; }
-      </style>
+      <title>D3-SVG</title>
     </head>
     <body>
-    <div id="app">`;
+      <div id="app">`;
+
+router.get('/', (req, res) => {
+  const componentStream = renderToNodeStream(<App />);
 
   res.write(htmlStart);
 
   componentStream.pipe(res, { end: false });
 
   const htmlEnd = `</div>
-    <script src="/static/vendors~main~svg.js"></script>
-    <script src="/static/main.js"></script>
-  </body>
-  </html>`;
+        <script src="/static/vendors~main~svg.js"></script>
+        <script src="/static/main.js"></script>
+      </body>
+    </html>`;
 
   componentStream.on('end', () => {
     res.write(htmlEnd);
-
     res.end();
   });
 });
 
 router.get('/svg*', (req, res) => {
+  console.log('inside /svg path ===> ');
+
   const context = {};
 
   const component = renderToString(
     <StaticRouter location={req.url} context={context}>
-      <svgLists />
+      <SvgLists />
     </StaticRouter>
   );
 
-  const html = `
-    <!DOCTYPE html>
-      <html>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>D3-SVG</title>
-      </head>
-      <body>
-        <div id="app">${component}</div>
-        <script src="/dist/vendors~main~svg.js"></script>
-        <script src="/dist/svg.js"></script>
+  console.log('#####-- component', component);
+
+  const htmlEnd = `</div>
+        <script src="/static/vendors~main~svg.js"></script>
+        <script src="/static/svg.js"></script>
       </body>
-      </html>`;
+    </html>`;
+
+  const html = `${htmlStart} ${component} ${htmlEnd}`;
+
+  console.log('#####: context.url', context);
 
   if (context.url) {
     res.writeHead(301, { Location: context.url });
@@ -89,40 +86,6 @@ router.get('*', (req, res) => {
 });
 
 export default router;
-
-// router.get('/*', (req, res, next) => {
-//   const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
-//   const promise = activeRoute.fetchInitialData
-//     ? activeRoute.fetchInitialData(req.path)
-//     : Promise.resolve();
-//   promise
-//     .then(data => {
-//       const context = { data };
-//       const markup = renderToString(
-//         <StaticRouter location={req.url} context={context}>
-//           <App />
-//         </StaticRouter>
-//       );
-
-//       res.send(`
-//       <!DOCTYPE html>
-//         <html lang="en">
-//           <head>
-//             <meta charset="UTF-8" />
-//             <title>D3-SVG</title>
-//             <script src="/dist/bundle.js" defer></script>
-//             <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
-//           </head>
-//           <body>
-//             <div id="app">${markup}</div>
-//           </body>
-//         </html>
-//       `);
-//     })
-//     .catch(next);
-// });
-
-// export default router;
 
 // ==============================
 
