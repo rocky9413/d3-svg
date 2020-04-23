@@ -5,13 +5,13 @@
   "main": "dist/main.js",
   "scripts": {
     "clean": "rimraf dist",
-    "start": "node dist/server.js",
+    "start": "node ./dist/server.js",
     "prod": "npm run clean && webpack --env.mode production",
     "prod:analyze": "npm run prod -- --env.presets analyze",
     "prod:compress": "npm run prod -- --env.presets compress",
     "prod:custom": "npm run prod -- --env.presets custom",
     "dev-wp": "webpack-dev-server --env.mode development",
-    "dev-start": "nodemon --exec babel-node server/server.js",
+    "dev-start": "nodemon --exec babel-node ./server/server.js",
     "format": "prettier --write \"src/**/*.{js,jsx,html}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "debug": "node --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js --env.mode production",
@@ -22,6 +22,7 @@
     "express.js",
     "react-router",
     "server-side-rendering",
+    "isomorphic-react",
     "d3"
   ],
   "author": "RL",

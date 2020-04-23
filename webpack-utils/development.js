@@ -1,4 +1,5 @@
-const path = require('path');
+const webpack = require('webpack');
+// const path = require('path');
 
 module.exports = () => ({
   devServer: {
@@ -6,13 +7,15 @@ module.exports = () => ({
     watchContentBase: true,
     historyApiFallback: true,
     hot: true,
+    inline: true,
+    progress: true,
     port: 8080,
     proxy: {
       context: () => true,
       target: 'http://localhost:3000'
     }
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -20,5 +23,6 @@ module.exports = () => ({
         use: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 });

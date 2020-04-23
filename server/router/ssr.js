@@ -2,7 +2,7 @@ import express from 'express';
 import React from 'react';
 import { renderToString, renderToNodeStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import serialize from 'serialize-javascript';
+// import serialize from 'serialize-javascript';
 import App from '../../src/mainComponent/App';
 import SvgLists from '../../src/svg/SvgLists';
 
@@ -39,8 +39,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/svg*', (req, res) => {
-  console.log('inside /svg path ===> ');
-
   const context = {};
 
   const component = renderToString(
@@ -48,9 +46,7 @@ router.get('/svg*', (req, res) => {
       <SvgLists />
     </StaticRouter>
   );
-
-  console.log('#####-- component', component);
-
+  // console.log('##### inside /svg component', component);
   const htmlEnd = `</div>
         <script src="/static/vendors~main~svg.js"></script>
         <script src="/static/svg.js"></script>
@@ -58,8 +54,6 @@ router.get('/svg*', (req, res) => {
     </html>`;
 
   const html = `${htmlStart} ${component} ${htmlEnd}`;
-
-  console.log('#####: context.url', context);
 
   if (context.url) {
     res.writeHead(301, { Location: context.url });
@@ -87,14 +81,12 @@ router.get('*', (req, res) => {
 
 export default router;
 
-// ==============================
-
-// const ReactDOMServer = require('react-dom/server');
+// =============================================================
 
 // const render = (reactComponent) => {
 //     return new Promise((resolve, reject) => {
 //         const body = [];
-//         const bodyStream = ReactDOMServer.renderToNodeStream(reactComponent);
+//         const bodyStream = renderToNodeStream(reactComponent);
 //         bodyStream.on('data', (chunk) => {
 //             body.push(chunk.toString());
 //         });
@@ -108,3 +100,27 @@ export default router;
 // };
 
 // export default render;
+
+// =============================================================
+
+// const stylesheet = new ServerStyleSheet();
+// const html = ReactDOMServer.renderToString(
+//   stylesheet.collectStyles(
+//     <Root />
+//   )
+// );
+// const styleTags = stylesheet.getStyleTags();
+
+// res.status(200);
+// res.send(`
+//     <html>
+//       <head>
+//         <title>My awesome server-rendered app!</title>
+//         ${styleTags}
+//         <script src="/static/main.js" />
+//       </head>
+//       <body>
+//         <div id="app">${appHTML}</div>
+//       </body>
+//     </html>
+// `);

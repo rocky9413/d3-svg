@@ -60,7 +60,8 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
     node: {
       // Need this when working with express, otherwise the build fails
       __dirname: false, // if you don't put this is, __dirname
-      __filename: false // and __filename return blank or /
+      __filename: false, // and __filename return blank or /
+      console: false
     },
     externals: [nodeExternals()], // Need this to avoid error when working with Express
     entry: {

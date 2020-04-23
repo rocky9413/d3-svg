@@ -23,7 +23,6 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
         filename: '[name].js'
       },
       target: 'web',
-      devtool: 'source-map',
       resolve: {
         extensions: ['.js', '.jsx']
       },
