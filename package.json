@@ -6,11 +6,11 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "node dist/server.js",
-    "prod": "npm run clean && webpack --env.mode production --config webpack.front.js && webpack --env.mode production --config webpack.back.js",
+    "prod": "npm run clean && webpack --env.mode production",
     "prod:analyze": "npm run prod -- --env.presets analyze",
     "prod:compress": "npm run prod -- --env.presets compress",
     "prod:custom": "npm run prod -- --env.presets custom",
-    "dev-all": "webpack-dev-server --env.mode development --config webpack.front.js && webpack-dev-server --env.mode development --config webpack.back.js",
+    "dev-wp": "webpack-dev-server --env.mode development",
     "dev-start": "nodemon --exec babel-node server/server.js",
     "format": "prettier --write \"src/**/*.{js,jsx,html}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",

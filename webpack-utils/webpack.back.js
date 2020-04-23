@@ -1,6 +1,9 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// "dev-f": "webpack-dev-server --env.mode development --config webpack.front.js"
+// "dev-b": "webpack-dev-server --env.mode development --config webpack.back.js"
 
 module.exports = ({ mode } = { mode: 'production' }) => {
   return {

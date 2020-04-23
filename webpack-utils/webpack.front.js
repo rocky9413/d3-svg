@@ -1,10 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackMerge = require('webpack-merge');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const modeConfig = env => require(`./webpack-utils/${env}`)(env);
-const addPresets = require('./webpack-utils/addPresets');
+const addPresets = require('./addPresets');
+
+// "dev-f": "webpack-dev-server --env.mode development --config webpack.front.js"
+// "dev-b": "webpack-dev-server --env.mode development --config webpack.back.js"
 
 module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
   // console.log('WP MODE ===> ', mode, ' --- Presets ===>', presets);

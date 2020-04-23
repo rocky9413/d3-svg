@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackMerge = require('webpack-merge');
 
 const modeConfig = env => require(`./webpack-utils/${env}`)(env);
@@ -25,6 +25,35 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
     use: 'ts-loader'
   };
 
+  const clientConfig = webpackMerge(
+    {
+      mode,
+      target: 'web',
+      entry: {
+        main: path.resolve(__dirname, './src/mainComponent/main.js'),
+        svg: path.resolve(__dirname, './src/svg/svgSection.js')
+      },
+      output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js'
+      },
+      resolve: {
+        extensions: ['.js', '.jsx']
+      },
+      module: {
+        rules: [js, ts]
+      },
+      optimization: {
+        splitChunks: {
+          chunks: 'all'
+        }
+      },
+      plugins: [new webpack.ProgressPlugin()]
+    },
+    modeConfig(mode),
+    addPresets({ mode, presets })
+  );
+
   const serverConfig = {
     mode,
     target: 'node',
@@ -47,34 +76,5 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
     }
   };
 
-  const clientConfig = webpackMerge(
-    {
-      mode,
-      target: 'web',
-      entry: {
-        main: path.resolve(__dirname, './src/mainComponent/main.js'),
-        svg: path.resolve(__dirname, './src/svg/svgSection.js')
-      },
-      output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
-      },
-      devtool: 'source-map',
-      resolve: {
-        extensions: ['.js', '.jsx']
-      },
-      module: {
-        rules: [js, ts]
-      },
-      optimization: {
-        splitChunks: {
-          chunks: 'all'
-        }
-      },
-      plugins: [new webpack.ProgressPlugin()]
-    },
-    modeConfig(mode),
-    addPresets({ mode, presets })
-  );
-  return [serverConfig, clientConfig];
+  return [clientConfig, serverConfig];
 };
