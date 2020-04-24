@@ -1,6 +1,7 @@
 import SvgLists from './SvgLists';
 import Face from './Face';
 import BarChart from './BarChart';
+import Readme from './Readme';
 
 const SvgRoutes = [
   {
@@ -18,6 +19,11 @@ const SvgRoutes = [
     path: '/svg/barchart',
     name: 'Bar Chart',
     component: BarChart
+  },
+  {
+    path: '/svg/readme',
+    name: 'Readme',
+    component: Readme
   }
 ];
 

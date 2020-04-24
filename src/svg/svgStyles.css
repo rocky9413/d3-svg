@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: lightcyan;
+}
+
+h1 {
+  color: cornflowerblue;
+}
+
+.lines {
+  stroke: red;
+  stroke-width: 10;
+}
+
+.lines path {
+  stroke: lightcoral;
+  stroke-linejoin: round;
+}
+
+p {
+  color: blue;
+  font-size: 24px;
+}
+
+rect {
+  fill: steelblue;
+}
+
+text {
+  font-size: 2em;
+}

@@ -1,5 +1,7 @@
 import express from 'express';
 import React from 'react';
+import fs from 'fs';
+import path from 'path';
 import { renderToString, renderToNodeStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 // import serialize from 'serialize-javascript';
@@ -18,6 +20,8 @@ const htmlStart = `<!DOCTYPE html>
     </head>
     <body>
       <div id="app">`;
+
+// <link rel="stylesheet" type="text/css" href="/static/main.css">
 
 router.get('/', (req, res) => {
   const componentStream = renderToNodeStream(<App />);
@@ -46,7 +50,7 @@ router.get('/svg*', (req, res) => {
       <SvgLists />
     </StaticRouter>
   );
-  // console.log('##### inside /svg component', component);
+
   const htmlEnd = `</div>
         <script src="/static/vendors~main~svg.js"></script>
         <script src="/static/svg.js"></script>
@@ -61,6 +65,17 @@ router.get('/svg*', (req, res) => {
   } else {
     res.send(html);
   }
+});
+
+router.get('/readme', (req, res) => {
+  fs.readFile(
+    path.resolve(__dirname, '../../readme.md'),
+    'utf8',
+    (err, data) => {
+      if (err) throw err;
+      else res.json({ data });
+    }
+  );
 });
 
 router.get('*', (req, res) => {

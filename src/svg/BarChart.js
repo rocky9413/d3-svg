@@ -10,9 +10,6 @@ import {
 } from 'd3';
 
 const BarChart = () => {
-  const width = 960;
-  const height = 500;
-
   const data = [
     { country: 'China', population: 1415046000 },
     { country: 'India', population: 1354052000 },
@@ -26,8 +23,8 @@ const BarChart = () => {
     { country: 'Mexico', population: 130759000 }
   ];
 
-  const xValue = d => d.population;
-  const yValue = d => d.country;
+  const width = 960;
+  const height = 500;
   const margin = {
     top: 20,
     right: 50,
@@ -37,14 +34,8 @@ const BarChart = () => {
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  const xScale = scaleLinear()
-    .domain([0, max(data, xValue)])
-    .range([0, innerWidth]);
-
-  const yScale = scaleBand()
-    .domain(data.map(yValue))
-    .range([0, innerHeight])
-    .padding(0.1);
+  const xValue = d => d.population;
+  const yValue = d => d.country;
 
   // useEffect(() => { // csv not able to load file...
   //   csv("table.csv")
@@ -55,6 +46,15 @@ const BarChart = () => {
   const isCurrent = useRef(true);
 
   useEffect(() => {
+    const xScale = scaleLinear()
+      .domain([0, max(data, xValue)])
+      .range([0, innerWidth]);
+
+    const yScale = scaleBand()
+      .domain(data.map(yValue))
+      .range([0, innerHeight])
+      .padding(0.1);
+
     const g = select('svg').append('g');
     g.attr('transform', `translate(${margin.left}, ${margin.top})`);
 
@@ -79,23 +79,13 @@ const BarChart = () => {
     };
   }, []);
 
-  // return (
-  //   <div>
-  //     <svg width={width} height={height}></svg>
-  //   </div>
-  // );
-
   // 3:51:40
 
   return isCurrent.current ? (
     <div>
       <svg width={width} height={height}></svg>
     </div>
-  ) : (
-    <div>
-      <h2>{'bar chart'}</h2>
-    </div>
-  );
+  ) : null;
 };
 
 export default BarChart;

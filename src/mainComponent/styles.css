@@ -1,10 +1,11 @@
-* {
-  background-color: lavender;
-}
-
 body {
   margin: 0;
   overflow: hidden;
+  background-color: lavender;
+}
+
+h1 {
+  color: cornflowerblue;
 }
 
 .lines {
@@ -23,7 +24,7 @@ p {
 }
 
 rect {
-  fill: steelblue;
+  fill: slateblue;
 }
 
 text {

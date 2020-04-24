@@ -7,6 +7,7 @@ const App = () => {
   return (
     <div>
       <h1>Pick a Section from below:</h1>
+      <h3>New subject</h3>
       <a href="/svg">d3-SVG-Lists</a>
     </div>
   );

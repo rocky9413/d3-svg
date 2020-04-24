@@ -2,6 +2,7 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import SvgLists from './SvgLists';
+import './svgStyles.css';
 
 const Svg = () => (
   <BrowserRouter>
@@ -9,4 +10,6 @@ const Svg = () => (
   </BrowserRouter>
 );
 
-hydrate(<Svg />, document.getElementById('app'));
+if (typeof window !== 'undefined') {
+  hydrate(<Svg />, document.getElementById('app'));
+}

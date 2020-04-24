@@ -38,7 +38,7 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
         filename: '[name].js'
       },
       resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.css']
       },
       module: {
         rules: [js, ts]
