@@ -20,18 +20,21 @@ const SvgLists = () => {
 
       <hr />
 
-      {/* {SvgRoutes.filter(({ path }) => path !== '/svg').map(
+      {SvgRoutes.filter(({ path }) => path !== '/svg').map(
         ({ path, exact, component: Component, ...rest }) => (
-          <Route key={path} path={path} exact={exact}
+          <Route
+            key={path}
+            path={path}
+            exact={exact}
             render={props => <Component {...props} {...rest} />}
           />
         )
-      )} */}
-      {SvgRoutes.filter(({ path }) => path !== '/svg').map(
+      )}
+      {/* {SvgRoutes.filter(({ path }) => path !== '/svg').map(
         ({ path, exact, component }) => (
           <Route key={path} path={path} exact={exact} component={component} />
         )
-      )}
+      )} */}
     </div>
   );
 };

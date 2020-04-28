@@ -11,7 +11,7 @@
     "prod:compress": "npm run prod -- --env.presets compress",
     "prod:custom": "npm run prod -- --env.presets custom",
     "dev-w": "webpack --env.mode development --watch",
-    "dev-wdev": "webpack-dev-server --env.mode development",
+    "dev-dev": "webpack-dev-server --env.mode development",
     "dev-start": "nodemon --exec babel-node ./server/server.js",
     "format": "prettier --write \"src/**/*.{js,jsx,html}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
