@@ -8,14 +8,14 @@ module.exports = () => ({
     historyApiFallback: true,
     hot: true,
     inline: true,
-    progress: true,
-    port: 8080,
-    proxy: {
-      context: () => true,
-      target: 'http://localhost:3000'
-    }
+    progress: true
+    // port: 8080,
+    // proxy: {
+    //   context: () => true,
+    //   target: 'http://localhost:3000'
+    // }
   },
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   module: {
     rules: [
       {
